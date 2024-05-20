@@ -1,12 +1,36 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../auth/AuthProvider";
 
 const Nav = () => {
 
+    const { user, logoutUser } = useContext(AuthContext);
+
+    const handelLogout = () =>{
+        logoutUser()
+        .then(() =>{
+            alert('User logged out');
+        })
+    }
+
     const navItems = <>
-        <li><NavLink to = '/'>Home</NavLink></li>
-        <li><NavLink to = '/menu'>Our Menu</NavLink></li>
-        <li><NavLink to = '/order/salad'>Order Food</NavLink></li>
-        
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/menu'>Our Menu</NavLink></li>
+        <li><NavLink to='/order/salad'>Order Food</NavLink></li>
+
+
+        {
+            user ? <>
+            <p className="text-white font-bold">{user?.displayName}</p>
+                <button onClick={handelLogout} className="relative px-6 py-3 font-bold text-black group">
+                    <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-slate-400 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+                    <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+                    <span className="relative">Logout</span>
+                </button>
+            </> : <>
+                <li><NavLink to='/login'>Login</NavLink></li>
+            </>
+        }
 
     </>
     return (
