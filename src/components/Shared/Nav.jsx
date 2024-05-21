@@ -1,27 +1,38 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../auth/AuthProvider";
+import { FaCartArrowDown } from "react-icons/fa";
+import useCart from "../../hooks/useCart";
 
 const Nav = () => {
 
     const { user, logoutUser } = useContext(AuthContext);
 
-    const handelLogout = () =>{
+    const [cart] = useCart();
+    // console.log(cart);
+
+    const handelLogout = () => {
         logoutUser()
-        .then(() =>{
-            alert('User logged out');
-        })
+            .then(() => {
+                alert('User logged out');
+            })
     }
 
     const navItems = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/menu'>Our Menu</NavLink></li>
         <li><NavLink to='/order/salad'>Order Food</NavLink></li>
+        <li><Link to='/dashboard/cart'>
+            <button className="btn">
+            <FaCartArrowDown />
+                <div className="badge badge-secondary">+{cart.length}</div>
+            </button>
+        </Link></li>
 
 
         {
             user ? <>
-            <p className="text-white font-bold">{user?.displayName}</p>
+                {/* <p className="text-white font-bold">{user?.displayName}</p> */}
                 <button onClick={handelLogout} className="relative px-6 py-3 font-bold text-black group">
                     <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-slate-400 group-hover:translate-x-0 group-hover:translate-y-0"></span>
                     <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
@@ -47,7 +58,7 @@ const Nav = () => {
                 <a className="btn btn-ghost text-xl">daisyUI</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 flex items-center justify-center">
                     {navItems}
                 </ul>
             </div>

@@ -12,7 +12,9 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const page = location?.state || "/";
+    // const page = location?.state || "/";
+    const from = location.state?.from?.pathname || "/";
+    console.log(from);
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -42,7 +44,7 @@ const Login = () => {
                     timer: 1500
                 });
 
-                navigate(page, {replace : true})
+                navigate(from, {replace : true})
             })
             .then(err => {
                 console.log(err.massage);

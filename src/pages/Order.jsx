@@ -5,7 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import useMenu from '../hooks/useMenu';
 import MenuCard from '../components/Shared/MenuCard';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 
@@ -15,6 +15,7 @@ const Order = () => {
     const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
 
     const {category} = useParams();
+    console.log(category);
 
     const initialTab = categories.indexOf(category);
     console.log(category);
@@ -42,11 +43,13 @@ const Order = () => {
 
             <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 <TabList>
-                    <Tab>SALAD</Tab>
-                    <Tab>PIZZA</Tab>
-                    <Tab>SOUPS</Tab>
-                    <Tab>DESSERTS</Tab>
-                    <Tab>DRINKS</Tab>
+                    <Tab>
+                        <Link to = '/order/salad'>SALAD</Link>
+                    </Tab>
+                    <Tab><Link to = '/order/pizza'>Pizza</Link></Tab>
+                    <Tab><Link to = '/order/soup'>SOUPS</Link></Tab>
+                    <Tab><Link to = '/order/dessert'>DESSERTS</Link></Tab>
+                    <Tab><Link to = '/order/drinks'>DRINKS</Link></Tab>
                 </TabList>
                 <TabPanel>
                     <div className='grid grid-cols-3 gap-6'>
