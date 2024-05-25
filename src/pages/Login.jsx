@@ -4,6 +4,7 @@ import { AuthContext } from '../auth/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import SocialLogin from '../components/socialLogin/SocialLogin';
 
 const Login = () => {
 
@@ -14,7 +15,7 @@ const Login = () => {
 
     // const page = location?.state || "/";
     const from = location.state?.from?.pathname || "/";
-    console.log(from);
+    // console.log(from);
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -31,35 +32,35 @@ const Login = () => {
 
         console.log(email, password, captcha);
 
-        if (validateCaptcha(captcha) == true){
+        if (validateCaptcha(captcha) == true) {
             loginUser(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "You have successfully logged in",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                .then(result => {
+                    const user = result.user;
+                    console.log(user);
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "success",
+                        title: "You have successfully logged in",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
 
-                navigate(from, {replace : true})
-            })
-            .then(err => {
-                console.log(err.massage);
-            })
+                    navigate(from, { replace: true })
+                })
+                .then(err => {
+                    // console.log(err.message);
+                })
         }
-        else{
+        else {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "You put wrong captcha!",
                 footer: '<a href="#">Why do I have this issue?</a>'
-              });
+            });
         }
 
-        
+
     }
 
 
@@ -69,7 +70,7 @@ const Login = () => {
             <Helmet>
                 <title>Login || Bistro Boss</title>
             </Helmet>
-            <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
+            <div className="container flex flex-col items-center justify-center min-h-screen px-6 mx-auto">
                 <form onSubmit={handelLogin} className="w-full max-w-md">
                     <div className="flex justify-center mx-auto">
                         <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="Logo" />
@@ -148,6 +149,9 @@ const Login = () => {
                         </div>
                     </div>
                 </form>
+                <div className="flex justify-center mt-2">
+                    <SocialLogin></SocialLogin>
+                </div>
             </div>
         </section>
     );
