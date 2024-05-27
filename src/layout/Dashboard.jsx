@@ -31,7 +31,7 @@ const Dashboard = () => {
                                 <li className="flex items-center gap-2 p-4"><FaHome /><NavLink to='/dashboard/userHome'>User Home</NavLink></li>
                                 <li className="flex items-center gap-2 p-4"><FaCalendar /><NavLink to='/dashboard/userReservation'>Reservation</NavLink></li>
                                 <li className="flex items-center gap-2 p-4"><FaMoneyBill /><NavLink to='/dashboard/userPayment'>Payment History</NavLink></li>
-                                <li className="flex items-center gap-2 p-4"><FaCartArrowDown /><NavLink to='/dashboard/userCart'>My Cart({cart.length})</NavLink></li>
+                                <li className="flex items-center gap-2 p-4"><FaCartArrowDown /><NavLink to='/dashboard/cart'>My Cart({cart.length})</NavLink></li>
                                 <li className="flex items-center gap-2 p-4"><FaStar /><NavLink to='/dashboard/userAddReview'>Add Review</NavLink></li>
                                 <li className="flex items-center gap-2 p-4"><FaList /><NavLink to='/dashboard/myBookings'>My Bookings</NavLink></li>
                             </>
