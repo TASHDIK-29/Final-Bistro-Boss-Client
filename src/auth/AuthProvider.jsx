@@ -67,13 +67,15 @@ const AuthProvider = ({children}) => {
                     if(res.data.token){
                         localStorage.setItem('token', res.data.token);
                     }
+                    setLoading(false);
                 })
             }
             else{
                 // Remove Token from cookie
                 localStorage.removeItem('token');
+                setLoading(false);
             }
-            setLoading(false);
+            // setLoading(false);
         })
 
         return () => unsubscribe();
